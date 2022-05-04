@@ -50,12 +50,18 @@
 			$("form").attr("method" , "POST").attr("action" , "/product/listProduct?menu=${param.menu}").submit();
 		}
 	
-			
+		//============= "검색"  Event  처리 =============	
+		 $(function() {
+			 //==> DOM Object GET 3가지 방법 ==> 1. $(tagName) : 2.(#id) : 3.$(.className)
+			 $( "button.btn.btn-default" ).on("click" , function() {
+				fncGetList(1);
+			});
+		 });	
 		
 		$(function() {
 
 			<c:if test="${param.menu eq 'manage'}">
-			$("#button").on("click" , function() {
+			$(".btn-success").on("click" , function() {
 						//Debug..
 						//alert(  $( this ).text().trim() );
 						self.location = "/product/updateProduct?prodNo="
@@ -65,9 +71,7 @@
 
 			<c:if test="${param.menu == 'search'}">
 
-			$("td:nth-child(2)").on(
-					"click",
-					function() {
+			$(".btn-success").on("click",function() {
 						//Debug..
 						//alert(  $( this ).text().trim() );
 
@@ -90,14 +94,12 @@
 								//Debug...
 								//alert("JSONData : \n"+JSONData);
 								//alert(JSON.stringify(JSONData));
-								var displayValue = "<h3>" + "상품번호 : "
-										+ JSONData.prodNo + "<br/>"
-										+ "상 품 명 : " + JSONData.prodName
-										+ "<br/>" + "이 미 지 : "
-										+ JSONData.fileName + "<br/>"
-										+ "상세정보 : " + JSONData.prodDetail
-										+ "<br/>" + "제조일자 : "
-										+ JSONData.regDate + "<br/>"
+								var displayValue = "<h3>" 
+										+ "상품번호 : "+ JSONData.prodNo + "<br/>"
+										+ "상 품 명 : " + JSONData.prodName+ "<br/>" 
+										/* + "이 미 지 : "+ JSONData.fileName + "<br/>" */
+										+ "상세정보 : " + JSONData.prodDetail+ "<br/>"
+										/* + "제조일자 : "+ JSONData.regDate + "<br/>" */
 										+ "가  격 : " + JSONData.price + "<br/>"
 										+ "</h3>";
 								//Debug...									
@@ -135,8 +137,8 @@
 	<jsp:include page="/layout/toolbar.jsp" />
 	<div class="container">
 
-		<div class="col-md-6 text-left">
-			<p class="text-primary">
+		<div class="page-header text-left">
+			<p class="text-success">
 				<c:choose>
 					<c:when test="${param.menu == 'manage'}">
 						<h3>상품 관리</h3>
@@ -148,7 +150,7 @@
 			</p>
 		</div>
 
-		<div class="row">
+	<%-- 	<div class="row">
 
 			<div class="col-md-6 text-left">
 				<p class="text-primary">전체 ${resultPage.totalCount } 건수, 현재
@@ -168,6 +170,7 @@
 								${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
 						</select>
 					</div>
+					
 
 					<div class="form-group">
 						<label class="sr-only" for="searchKeyword">검색어</label> <input
@@ -184,6 +187,41 @@
 				</form>
 			</div>
 
+		</div> --%>
+		
+		<div class="row">
+	    
+		    <div class="col-md-6 text-left">
+		    	<p class="text-primary">
+		    		전체  ${resultPage.totalCount } 건수, 현재 ${resultPage.currentPage}  페이지
+		    	</p>
+		    </div>
+		    
+		    <div class="col-md-6 text-right">
+			    <form class="form-inline" name="detailForm">
+			    
+				  <div class="form-group">
+				    <select class="form-control" name="searchCondition" >
+						<option value="0" ${ ! empty search.searchCondition && search.searchCondition==0 ? "selected" : "" }>상품번호</option>
+						<option value="1" ${ ! empty search.searchCondition && search.searchCondition==1 ? "selected" : "" }>상품명</option>
+						<option value="2" ${ ! empty search.searchCondition && search.searchCondition==2 ? "selected" : "" }>상품가격</option>
+					</select>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="sr-only" for="searchKeyword">검색어</label>
+				    <input type="text" class="form-control" id="searchKeyword" name="searchKeyword"  placeholder="검색어"
+				    			 value="${! empty search.searchKeyword ? search.searchKeyword : '' }"  >
+				  </div>
+				  
+				  <button type="button" class="btn btn-default">검색</button>
+				  
+				  <!-- PageNavigation 선택 페이지 값을 보내는 부분 -->
+				  <input type="hidden" id="currentPage" name="currentPage" value=""/>
+				  
+				</form>
+	    	</div>
+	    	
 		</div>
 
 		<%-- <table class="table table-hover table-striped">
@@ -218,7 +256,7 @@
 
 		</table> --%>
 		<!--  table End /////////////////////////////////////-->
-
+		<br/><br/><br/>
 		<div class="row">
 			<c:set var="i" value="0" />
 			<c:forEach var="product" items="${list}">
@@ -229,7 +267,7 @@
 						<img src="..." alt="...">
 						<div class="caption">
 
-							<h3>${product.prodName}</h3>
+							<h2>${product.prodName}</h2>
 
 							<%-- <tr>
 						<td align="center">${ i }</td>
@@ -242,8 +280,10 @@
 					</tr> --%>
 
 							<p>
-								<a href="#" class="btn btn-primary" id="button" role="button" prodNo="${product.prodNo}">Button</a>
+								<a href="#" class="btn btn-success" role="button" prodNo="${product.prodNo}">확인</a>
+						
 							</p>
+							<p id="${product.prodNo}"></p>
 
 						</div>
 					</div>

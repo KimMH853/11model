@@ -97,7 +97,8 @@ public class ProductController {
 		// Business Logic
 		productService.updateProduct(product);
 
-		return "redirect:/product/getProduct?prodNo=" + product.getProdNo();
+		/* return "forward:/product/getProduct?prodNo=" + product.getProdNo(); */
+		return "forward:/product/getProduct.jsp";
 	}
 
 	@RequestMapping( value="listProduct")

@@ -138,12 +138,13 @@
             </div>
 		    </div>
 		     <script type="text/javascript">
-	          $(function () {
-	             $('#datetimepicker').datetimepicker({
-	            	/*  format: "yyyy-mm-dd" */
-	             });
-	         }); 
-	         
+	           $(function () { 
+	             /* $('#datetimepicker').datetimepicker().data('DateTimePicker').format('YYYY-MM-DD'); */
+	        	   $('#datetimepicker').datetimepicker({
+		         		format: 'YYYY-MM-DD'
+		         	}); 
+	          });
+	         	
 	      </script>
 	      </div>
 		  
