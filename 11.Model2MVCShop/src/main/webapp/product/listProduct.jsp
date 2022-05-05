@@ -264,7 +264,7 @@
 				<div class="col-sm-6 col-md-4">
 
 					<div class="thumbnail">
-						<img src="..." alt="...">
+						<img src="/images/uploadFiles/${product.fileName}" alt="...">
 						<div class="caption">
 
 							<h2>${product.prodName}</h2>

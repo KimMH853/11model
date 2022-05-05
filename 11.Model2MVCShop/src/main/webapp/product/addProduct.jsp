@@ -52,7 +52,8 @@
 	<!-- ToolBar Start /////////////////////////////////////-->
 	<jsp:include page="/layout/toolbar.jsp" />
    	<!-- ToolBar End /////////////////////////////////////-->
-	
+<form>
+	<input type="hidden" name="prodNo" value="${product.prodNo}"/>
 	<!--  拳搁备己 div Start /////////////////////////////////////-->
 	<div class="container">
 	
@@ -120,6 +121,8 @@
 		
  	</div>
  	<!--  拳搁备己 div Start /////////////////////////////////////-->
+
+</form>	
 
 </body>
 
